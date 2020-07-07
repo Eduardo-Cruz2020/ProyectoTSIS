@@ -36,5 +36,11 @@ public class MainController {
 	
 		return "pelicula";
 	}
+	@GetMapping("/pelicula/crear")
+	public String CrearPelicula() {
+		
+	
+		return "crearPelicula";
+	}
 
 }
