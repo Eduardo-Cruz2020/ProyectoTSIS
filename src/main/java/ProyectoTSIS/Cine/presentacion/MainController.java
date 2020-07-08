@@ -42,5 +42,11 @@ public class MainController {
 	
 		return "crearPelicula";
 	}
+	@GetMapping("/boletos/pago")
+	public String pagoBoleto() {
+		
+	
+		return "pagoTarjeta";
+	}
 
 }
