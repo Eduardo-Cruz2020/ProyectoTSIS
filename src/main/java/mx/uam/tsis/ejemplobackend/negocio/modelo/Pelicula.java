@@ -1,4 +1,4 @@
-package ProyectoTSIS.Cine.negocio.modelo;
+package mx.uam.tsis.ejemplobackend.negocio.modelo;
 
 public class Pelicula {
 	private Integer Id;

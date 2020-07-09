@@ -1,4 +1,4 @@
-package ProyectoTSIS.Cine.presentacion;
+package mx.uam.tsis.ejemplobackend.presentacion;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

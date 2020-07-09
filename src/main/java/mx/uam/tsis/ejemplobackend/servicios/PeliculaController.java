@@ -1,4 +1,4 @@
-package ProyectoTSIS.Cine.servicios;
+package mx.uam.tsis.ejemplobackend.servicios;
 
 
 public class PeliculaController {
