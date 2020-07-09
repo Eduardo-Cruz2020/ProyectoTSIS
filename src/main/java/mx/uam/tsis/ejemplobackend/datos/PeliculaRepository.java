@@ -1,4 +1,4 @@
-package ProyectoTSIS.Cine.datos;
+package mx.uam.tsis.ejemplobackend.datos;
 
 
 public class PeliculaRepository {
