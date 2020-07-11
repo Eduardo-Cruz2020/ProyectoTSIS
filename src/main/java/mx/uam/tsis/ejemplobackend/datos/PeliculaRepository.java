@@ -1,7 +1,10 @@
 package mx.uam.tsis.ejemplobackend.datos;
 
+import org.springframework.data.repository.CrudRepository;
 
-public class PeliculaRepository {
+import mx.uam.tsis.ejemplobackend.negocio.modelo.Pelicula;
+
+public interface PeliculaRepository  extends CrudRepository<Pelicula,Integer>{
 	
 	
  
