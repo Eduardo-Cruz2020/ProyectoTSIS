@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import lombok.extern.slf4j.Slf4j;
 import mx.uam.tsis.ejemplobackend.datos.IBoletosRepository;
+
 import mx.uam.tsis.ejemplobackend.negocio.modelo.Boleto;
 
 @Slf4j
@@ -75,5 +76,15 @@ public class BoletosService implements IBoletosService{
 	
 	
     }
+    
+    public Boleto findByIdPelicula(Integer idboleto) {
+
+		// LÃ³gica de negocio
+		
+		Optional <Boleto> boletoOpt = boletosRepository.findById(idboleto);
+		
+		return boletoOpt.get();
+	}
+
 
 }

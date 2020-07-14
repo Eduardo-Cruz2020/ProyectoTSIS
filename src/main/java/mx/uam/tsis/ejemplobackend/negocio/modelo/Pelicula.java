@@ -1,11 +1,16 @@
 package mx.uam.tsis.ejemplobackend.negocio.modelo;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -17,6 +22,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @Data
 @Entity
+
 public class Pelicula {
 	@Id
 	@GeneratedValue //autogenera un Id unico
@@ -40,4 +46,14 @@ public class Pelicula {
 	@NotBlank
 	@ApiModelProperty(notes="Imagen", required=true)
 	private String imagenURL;
+	
+	@Builder.Default
+	@OneToMany(targetEntity = Boleto.class, fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+	//@JoinColumn(name = "id") // No crea tabla intermedia	
+	private List <Boleto> Boleto = new ArrayList <> ();
+	
+	public boolean addBoletos(Boleto boleto) {
+		return Boleto.add(boleto);
+	}
+
 }

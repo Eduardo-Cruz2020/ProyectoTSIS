@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.annotations.ApiOperation;
@@ -110,6 +110,23 @@ public class PeliculaController {
 		}
 		
 		
+	}
+	
+	
+	@PostMapping(path = "/peliculas/{id_pelicula}/boleto", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity <?> addStudentToGroup(
+			@PathVariable("id_pelicula") Integer id_pelicula,
+			@RequestParam("id_boleto") Integer id_boleto) {
+		
+		boolean result = peliculaService.addBoletoToPelicula(id_pelicula, id_boleto);
+		
+		if(result) {
+			return ResponseEntity.status(HttpStatus.OK).build(); 
+		} else {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).build(); 
+		}
+		
+	
 	}
 	
 	
