@@ -1,5 +1,5 @@
 <!doctype html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 	<title>Cine</title>
  	<meta charset="utf-8">
@@ -44,12 +44,17 @@
     	</li>
     	<li class="nav-item">
        		<h3>
-      			<a class="nav-link" href="http://localhost:8080/boletos">Boletos <i class='fas fa-money-bill'></i></a>
+      			<a class="nav-link" href="http://localhost:8080/compraBoletos">Boletos <i class='fas fa-money-bill'></i></a>
       		</h3>
+    	</li>
+    	<li class="nav-item" sec:authorize="hasRole('ADMIN')">
+      		<h3>
+      			<a class="nav-link" href="/peliculasCatalogo">Administrador <i class='far fa-folder-open'></i></a>
+       		</h3>
     	</li>
     	<li class="nav-item">
       		<h3>
-      			<a class="nav-link" href="http://localhost:8080/login">Administrador <i class='far fa-folder-open'></i></a>
+      			<a sec:authorize="!isAuthenticated()" class="nav-link" href="/login">Login<i class='far fa-folder-open'></i></a>
        		</h3>
     	</li>
   	</ul>

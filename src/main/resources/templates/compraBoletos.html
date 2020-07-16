@@ -1,0 +1,92 @@
+<!doctype html>
+<html>
+<head>
+	<title>Boleto</title>
+  	<meta charset="utf-8">
+  	<meta name="viewport" content="width=device-width, initial-scale=1">
+  	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+ 	<meta name="viewport" content="width=device-width, initial-scale=1">
+  	<script src="https://kit.fontawesome.com/a076d05399.js"></script>
+  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+	<style>
+		html,body{
+			background-image: url('https://img.freepik.com/foto-gratis/composicion-flat-lay-objetos-cine_23-2148115449.jpg?size=626&ext=jpg');
+			background-size: cover;
+			height: 100%;
+			font-family: 'Numans', sans-serif;
+			text-color:white;
+		}
+    	div	{
+			color:white;
+			text-color:white;
+		}
+	</style>
+</head>
+<body>
+	<nav class="navbar navbar-expand-sm  bg-dark navbar-dark">
+		<ul class="navbar-nav">
+    		<li class="nav-item">
+   				<h3>
+      				<a class="nav-link" href="http://localhost:8080/">Inicio <i class='fas fa-house-user'></i></a>
+      			</h3>
+    		</li>
+    		<li class="nav-item">
+    			<h3>
+      				<a class="nav-link" href="http://localhost:8080/cartelera">Cartelera <i class='fas  fa-film'></i></a>
+     			</h3>
+
+  		</ul>
+	</nav>
+
+	<div class="container">
+		<h2>Compra  boleto</h2>
+		<h2>Costo por boleto: $30</h2>
+	</div>
+		<div class="container-sm p-3 my-3 ">
+	    	<form id="formulario" action="http://localhost:8080/boletos/pago " >
+	    		<label for="cliente"> Cliente:</label><br>
+		  		<input type="text" class="form-control" placeholder="nombre del cliente" id="cliente" required="required" maxlength="200"  >
+		  		<label for="fecha"> Fecha:</label><br>
+		  		<input type="date" class="form-control" placeholder="fecha de compra" id="fecha" required="required">
+		  		<label for="hora"> Horario:</label><br>
+		  		<input type="time" class="form-control" placeholder="hora de la función"id="hora" required="required">
+		  		<label for="numero"> Numero de boletos:</label><br>
+		  		<input type="number" class="form-control" placeholder="cantidad de boletos"id="cantidad" required="required" maxlength="2" >
+		  		<label for="pelicula">Pelicula:</label><br>
+		  		<input type="text" class="form-control" placeholder="nombre de película" id="pelicula" required="required" maxlength="300" ><br>
+		 		<label for="total">Pelicula:</label><br>
+		  		<input type="number" class="form-control" placeholder="Total a pagar" id="total" required="required" maxlength="300" ><br>
+		 	
+		 	<button class="btn btn-success" type="submit" id="Btn" onclick="guardarBoleto();">Comprar</button>
+		 	</form>
+		 	<form  action="http://localhost:8080/compraBoletos " >
+		 		<button class="btn btn-primary" type="submit" id="borrar" onclick="inicio">Cancelar</button>
+		 	</form>
+		</div>
+	<script> 
+		function guardarBoleto(){
+			var montoA ;
+			montoA = cantidad:$('#cantidad').val() * 30;
+			$.ajaxSetup({contentType:"aplication/json; charset=utf-8"});
+			var request = $.ajax({
+				  method: "POST",
+				  url: "http://localhost:8080/boletos",
+				  data: JSON.stringify({id: "0", cliente: $('#cliente').val() , fecha: $('#fecha').val(), horario:$('#hora').val(), cantidad:$('#cantidad').val(), pelicula:$('#pelicula').val(), monto : montoA}),
+				  contentType: "application/json"
+				});
+				request.done(function(data) {
+					alert("Total a pagar ..."+ montoA);
+				});
+				
+				request.fail(function() {
+		 			 alert("Fallo  la conexion...");
+				});
+		}
+	</script>
+    
+</body>
+</html>
