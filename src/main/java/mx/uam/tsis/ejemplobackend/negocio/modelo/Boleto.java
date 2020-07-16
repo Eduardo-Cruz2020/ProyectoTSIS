@@ -54,5 +54,9 @@ public class Boleto implements Serializable {
     @NotNull
     @Column(name = "pelicula")
     private String pelicula;
+    
+    @NotNull
+    @Column(name = "monto")
+    private Integer monto;
 
 }

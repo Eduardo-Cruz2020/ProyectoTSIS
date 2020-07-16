@@ -42,7 +42,10 @@
   		</ul>
 	</nav>
 
-	<div class="container"><h2>Compra  boleto</h2></div>
+	<div class="container">
+		<h2>Compra  boleto</h2>
+		<h2>Costo por boleto: $30</h2>
+	</div>
 		<div class="container-sm p-3 my-3 ">
 	    	<form id="formulario" action="http://localhost:8080/boletos/pago " >
 	    		<label for="cliente"> Cliente:</label><br>
@@ -55,6 +58,9 @@
 		  		<input type="number" class="form-control" placeholder="cantidad de boletos"id="cantidad" required="required" maxlength="2" >
 		  		<label for="pelicula">Pelicula:</label><br>
 		  		<input type="text" class="form-control" placeholder="nombre de película" id="pelicula" required="required" maxlength="300" ><br>
+		 		<label for="total">Pelicula:</label><br>
+		  		<input type="number" class="form-control" placeholder="Total a pagar" id="total" required="required" maxlength="300" ><br>
+		 	
 		 	<button class="btn btn-success" type="submit" id="Btn" onclick="guardarBoleto();">Comprar</button>
 		 	</form>
 		 	<form  action="http://localhost:8080/compraBoletos " >
@@ -63,17 +69,17 @@
 		</div>
 	<script> 
 		function guardarBoleto(){
-		
-			alert("hola");
+			var montoA ;
+			montoA = cantidad:$('#cantidad').val() * 30;
 			$.ajaxSetup({contentType:"aplication/json; charset=utf-8"});
 			var request = $.ajax({
 				  method: "POST",
 				  url: "http://localhost:8080/boletos",
-				  data: JSON.stringify({id: "0", cliente: $('#cliente').val() , fecha: $('#fecha').val(), horario:$('#hora').val(), cantidad:$('#cantidad').val(), pelicula:$('#pelicula').val()}),
+				  data: JSON.stringify({id: "0", cliente: $('#cliente').val() , fecha: $('#fecha').val(), horario:$('#hora').val(), cantidad:$('#cantidad').val(), pelicula:$('#pelicula').val(), monto : montoA}),
 				  contentType: "application/json"
 				});
 				request.done(function(data) {
-					alert("Boleto guardado con exito...");
+					alert("Total a pagar ..."+ montoA);
 				});
 				
 				request.fail(function() {

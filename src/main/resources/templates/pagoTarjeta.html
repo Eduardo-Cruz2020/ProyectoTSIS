@@ -242,24 +242,24 @@ overflow-y: auto;
       <div class="modal__content">
         <h2>Detalles de pago</h2>
 
-        <form action="http://localhost:8080/boletos">
+        <form action="http://localhost:8080/compraBoletos">
           <ul class="form-list">
             <li class="form-list__row">
               <label>Nombre</label>
-              <input type="text" name="" required="" />
+              <input type="text" id="cliente" name="" required="required" />
             </li>
             <li class="form-list__row">
               <label>Numero de tarjeta</label>
               <div id="input--cc" class="creditcard-icon">
-                <input type="text" name="cc_number" required="" />
+                <input type="number" id="numero" name="cc_number" required="required" />
               </div>
             </li>
             <li class="form-list__row form-list__row--inline">
               <div>
                 <label>Fecha de expiracion</label>
                 <div class="form-list__input-inline">
-                  <input type="text" name="cc_month" placeholder="MM"  pattern="\\d*" minlength="2" maxlength="2" required="" />
-                  <input type="text" name="cc_year" placeholder="YY"  pattern="\\d*" minlength="2" maxlength="2" required="" />
+                  <input type="number" name="cc_month" id="mes" placeholder="MM"  pattern="\\d*" minlength="2" maxlength="2" required="required" />
+                  <input type="number" name="cc_year" id="año"placeholder="YY"  pattern="\\d*" minlength="2" maxlength="2" required="required" />
                 </div>
               </div>
               <div>
@@ -271,21 +271,42 @@ overflow-y: auto;
                     <span class="visuallyhidden">What is CVV?</span>
                   </a>
                 </label>
-                <input type="text" name="cc_cvc" placeholder="123" pattern="\\d*" minlength="3" maxlength="4" required="" />
+                <input type="number" id="cvv" name="cc_cvc" placeholder="123" pattern="\\d*" minlength="3" maxlength="4" required="required" />
               </div>
             </li>
             <li>
-              <button type="submit" class="button">Aceptar</button>
+              <button type="submit" class="button" onclick="guardaPago()" >Aceptar</button>
               
             </li>
           </ul>
         </form>
-          <form action="http://localhost:8080/boletos">
-			<button class="btn btn-primary" >Cancelar</button>
+          <form action="http://localhost:8080/compraBoletos">
+			<button class="btn btn-primary"  >Cancelar</button>
 		  </form>
       </div> 
     </div> 
   </div> 
+	
+	<script>
+    function guardaPago(){
+		alert("Pago realizado con exito");
 
+    	
+		var request = $.ajax({
+		  method: "POST",
+		  url: "http://localhost:8080/pagos",
+		  data: JSON.stringify({id: "0", cliente: $('#cliente').val() , numeroTarjeta: $('#numero').val(), mes:$('#mes').val(),año:$('#año').val(), cvv:$('#cvv').val()}),
+		  contentType: "application/json"
+		});
+		request.done(function(data) {
+			alert("Pago cralizado con exito...");
+		});
+		
+		request.fail(function() {
+ 			 alert("Fallo  la conexion...");
+		});
+		alert("hola");
+	}
+	</script>
 </body>
 </html>

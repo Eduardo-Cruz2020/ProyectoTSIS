@@ -57,23 +57,30 @@ public class BoletosService implements IBoletosService{
 
     @Override
     public boolean deleteById(Integer id) {
-	if(id != null) {
-	    if(boletosRepository.findById(id).isPresent()) {
-		    try {
-			    boletosRepository.deleteById(id);
-			    return true;
-			}catch(Exception e) {
-			    log.error("Error al eliminar boleto: "+e);
-			    return false;
-			}
-		}else {
-		    return false;
-		}
-	}else {
-	    return false;
+    	if(id != null) {
+    		if(boletosRepository.findById(id).isPresent()) {
+    			try {
+    				boletosRepository.deleteById(id);
+    				return true;
+    			}catch(Exception e) {
+    				log.error("Error al eliminar boleto: "+e);
+    				return false;
+    			}
+    		}else {
+    			return false;
+    		}
+    	}else {
+    		return false;
+    	}
+   }
+    
+    public Boleto findByIdPelicula(Integer idboleto) {
+
+		// LÃ³gica de negocio
+		
+		Optional <Boleto> boletoOpt = boletosRepository.findById(idboleto);
+		
+		return boletoOpt.get();
 	}
-	
-	
-    }
 
 }

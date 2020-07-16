@@ -1,8 +1,13 @@
 package mx.uam.tsis.ejemplobackend.negocio.modelo;
 
+import java.util.List;
+import java.util.ArrayList;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -49,6 +54,15 @@ public class Pelicula {
 	@NotBlank
 	@ApiModelProperty(notes="Clasificacion", required=true)
 	private String clasificacion;
+	
+	@Builder.Default
+	@OneToMany(targetEntity = Boleto.class, fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+	//@JoinColumn(name = "id") // No crea tabla intermedia	
+	private List <Boleto> Boleto = new ArrayList <> ();
+	
+	public boolean addBoletos(Boleto boleto) {
+		return Boleto.add(boleto);
+	}
 
 
 }

@@ -15,5 +15,8 @@ public interface IBoletosService {
     public Optional<Boleto> update(Boleto boleto);
 
     public boolean deleteById(Integer id);
+    
+    public Boleto findByIdPelicula(Integer idBoleto);
+
 
 }

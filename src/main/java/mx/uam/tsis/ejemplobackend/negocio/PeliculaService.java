@@ -8,14 +8,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import mx.uam.tsis.ejemplobackend.datos.PeliculaRepository;
-
+import mx.uam.tsis.ejemplobackend.negocio.modelo.Boleto;
 import mx.uam.tsis.ejemplobackend.negocio.modelo.Pelicula;
 
 
 @Service
 public class PeliculaService {
+	
 	@Autowired
 	private PeliculaRepository peliculaRepository;
+	@Autowired
+	private IBoletosService boletoservice;
 	
 	public Pelicula create(Pelicula nuevaPelicula) 
 	{
@@ -62,7 +65,31 @@ public class PeliculaService {
 		}
 	}
 	
-	
+	public boolean addBoletoToPelicula(Integer peliculaId, Integer idBoleto) {
+		
+		
+		// 1.- Recuperamos primero al boleto
+		Boleto boleto = boletoservice.findByIdPelicula(idBoleto);
+		
+		// 2.- Recuperamos la pelicula
+		Optional <Pelicula> peliOpt = peliculaRepository.findById(peliculaId);
+		
+		// 3.- Verificamos que existan ambos elemetos
+		if(!peliOpt.isPresent() || boleto == null) {
+			
+			
+			return false;
+		}
+		
+		// 4.- Agrego el alumno al grupo
+		Pelicula peli = peliOpt.get();
+		peli.addBoletos(boleto);
+		
+		// 5.- Persistir el cambio
+		peliculaRepository.save(peli);
+		
+		return true;
+	}
 
 	
 }
