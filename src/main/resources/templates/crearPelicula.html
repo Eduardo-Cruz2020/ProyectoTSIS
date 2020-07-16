@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 	<title>crear pelicula</title>
 	<meta charset="utf-8">
@@ -145,6 +145,11 @@
 		    <li class="nav-item">
 		    
 		      <a class="nav-link" href="http://localhost:8080/peliculasCatalogo">Películas <i class='fas  fa-film'></i></a>
+		     
+		    </li>
+		     <li class="nav-item">
+		    
+		      <a class="nav-link" sec:authorize="isAuthenticated()" href="/logout">Cerrar sesión <i class='fas  fa-film'></i></a>
 		     
 		    </li>
 

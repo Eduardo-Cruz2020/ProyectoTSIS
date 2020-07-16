@@ -3,10 +3,7 @@ package mx.uam.tsis.ejemplobackend.presentacion;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import lombok.extern.slf4j.Slf4j;
-
 @Controller
-@Slf4j
 public class MainController {
 	
 	@GetMapping("/")
@@ -51,4 +48,9 @@ public class MainController {
 		return "pagoTarjeta";
 	}
 
+	@GetMapping("/error") // "resuelve" problema de redireccion de login
+	public String aux() {
+	    return "peliculasCatalogo";
+	}
+	
 }
