@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 	<title>Login Page</title>
    	<!--Made with love by Mutiullah Samim -->
@@ -114,19 +114,19 @@
 				</div>
 			</div>
 			<div class="card-body">
-				<form action="http://localhost:8080/peliculasCatalogo">
+					<form th:action="@{/login}" method="POST">
 					<div class="input-group form-group">
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fas fa-user"></i></span>
 						</div>
-						<input type="text" class="form-control" placeholder="username">
+						<input type="text" class="form-control" name="username" placeholder="username">
 						
 					</div><br>
 					<div class="input-group form-group">
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fas fa-key"></i></span>
 						</div>
-						<input type="password" class="form-control" placeholder="password">
+						<input type="password" class="form-control" name="password" placeholder="password">
 					</div><br>
 					<div class="form-group">
 					

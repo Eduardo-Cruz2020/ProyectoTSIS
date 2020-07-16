@@ -3,6 +3,7 @@ package mx.uam.tsis.ejemplobackend.configuracion;
 import java.util.Collections;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -16,6 +17,11 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @org.springframework.context.annotation.Configuration
 @EnableSwagger2
 public class Configuration {
+    
+    @Bean
+    public BCryptPasswordEncoder passwordEncoder() {
+	return new BCryptPasswordEncoder();
+    }
     
     @Bean
     public Docket api() {
