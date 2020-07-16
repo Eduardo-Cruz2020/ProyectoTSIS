@@ -3,7 +3,10 @@ package mx.uam.tsis.ejemplobackend.presentacion;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Controller
+@Slf4j
 public class MainController {
 	
 	@GetMapping("/")
@@ -24,17 +27,28 @@ public class MainController {
 	
 		return "cartelera";
 	}
-	@GetMapping("/boletos")
-	public String boleto() {
+	@GetMapping("/compraBoletos")
+	public String compraBoletos() {
 		
 		
-		return "boletos";
+		return "compraBoletos";
 	}
-	@GetMapping("/pelicula")
-	public String pelicula() {
+	@GetMapping("/peliculasCatalogo")
+	public String peliculasCatalogo() {
 		
 	
-		return "pelicula";
+		return "peliculasCatalogo";
+	}
+	@GetMapping("/crearPelicula")
+	public String crearPelicula() {
+	
+		return "crearPelicula";
+	}
+	@GetMapping("/boletos/pago")
+	public String pagoBoleto() {
+		
+	
+		return "pagoTarjeta";
 	}
 
 }

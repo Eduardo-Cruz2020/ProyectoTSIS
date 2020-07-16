@@ -20,7 +20,7 @@ public class PeliculaService {
 	public Pelicula create(Pelicula nuevaPelicula) 
 	{
 		
-		Optional<Pelicula> peliculaOpt = peliculaRepository.findById(nuevaPelicula.getId_Pelicula());
+		Optional<Pelicula> peliculaOpt = peliculaRepository.findById(nuevaPelicula.getId());
 				
 				if(!peliculaOpt.isPresent()) {
 					

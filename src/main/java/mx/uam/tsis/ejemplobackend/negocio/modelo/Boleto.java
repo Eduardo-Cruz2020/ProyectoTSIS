@@ -40,18 +40,19 @@ public class Boleto implements Serializable {
     private String cliente;
     
     @NotNull
-    @Column(name = "pelicula")
-    private String pelicula;
-    
-    @NotNull
-    @Column(name = "cantidad")
-    private Integer cantidad;
+    @Column(name = "fecha")
+    private String fecha;
     
     @NotNull
     @Column(name = "horario")
     private String horario;
     
     @NotNull
-    @Column(name = "fecha")
-    private String fecha;
+    @Column(name = "cantidad")
+    private Integer cantidad;
+    
+    @NotNull
+    @Column(name = "pelicula")
+    private String pelicula;
+
 }

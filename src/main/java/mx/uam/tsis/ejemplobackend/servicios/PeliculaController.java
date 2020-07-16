@@ -33,7 +33,7 @@ public class PeliculaController {
 	@ApiOperation(
 			value="Crear Pelicula nueva",
 			notes="Permite crear una pelicula ")
-	@PostMapping(path = "/listapeliculas", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(path = "/peliculas", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity <?> create(@RequestBody @Valid Pelicula nuevaPelicula) {
 				
 		log.info("Recibí llamada con una pelicula "+nuevaPelicula);
@@ -41,11 +41,11 @@ public class PeliculaController {
 		Pelicula pelicula = peliculaService.create(nuevaPelicula);
 		
 		if(pelicula != null) {
-			log.info("entre el metodo post");
+			log.info("Creación de pelicula exitosa");
 			return ResponseEntity.status(HttpStatus.CREATED).body(pelicula);
 			
 		} else {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("no se puede crear alumno");
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("no se puede crear la película");
 		}
 	
 
@@ -54,9 +54,10 @@ public class PeliculaController {
 	@ApiOperation(
 			value="Recupera todas la peliculas",
 			notes="Permite recuperar todas las peliculas existentes")
-	@GetMapping(path = "/listapeliculas", produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(path = "/peliculas", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity <?> retrieveAll() {
-		
+		log.info("recuperando lista de peliculas");
+
 		Iterable <Pelicula> result = peliculaService.retrieveAll();
 		
 		return ResponseEntity.status(HttpStatus.OK).body(result); 
@@ -67,7 +68,7 @@ public class PeliculaController {
 	@ApiOperation(
 			value="Recupera una pelicula",
 			notes="Permite recuperar una pelicula, necesitas su id para recupera todos sus datos")
-	@GetMapping(path = "/listapeliculas/{Id_Pelicula}", produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(path = "/peliculas/{Id_Pelicula}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity <?> retrieve(@Valid @PathVariable ("Id_Pelicula") Integer Id_Pelicula) {
 		log.info("Buscando al alumno con matricula "+Id_Pelicula);
 		Pelicula pelicula=peliculaService.retrieve(Id_Pelicula);
@@ -84,7 +85,7 @@ public class PeliculaController {
 	@ApiOperation(
 			value="Modifica una pelicula",
 			notes="Permite modificar los datos de una Pelicula, Se necesita el id de la pelicula y un objeto con todos los datos de la pelicula")
-	@PutMapping(path = "/listapeliculas/{Id_Pelicula}", produces = MediaType.APPLICATION_JSON_VALUE)
+	@PutMapping(path = "/peliculas/{Id_Pelicula}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> update(@Valid @PathVariable("Id_Pelicula") Integer matricula,@RequestBody  @Valid Pelicula nuevaPelicula ) {
 		Pelicula pelicula = peliculaService.update(matricula, nuevaPelicula);
 		System.out.println("PELICULA"+pelicula);
@@ -100,10 +101,12 @@ public class PeliculaController {
 	@ApiOperation(
 			value="Borra pelicula",
 			notes="Permite borrar una pelicula de nuestra base de datos. Requiere el id de la pelicula")
-	@DeleteMapping(path="/listapeliculas/{Id_Pelicula}", produces = MediaType.APPLICATION_JSON_VALUE)
+	@DeleteMapping(path="/peliculas/{Id_Pelicula}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity <?>delete(@Valid @PathVariable("Id_Pelicula") Integer Id_Pelicula) {
 		Boolean pelicula = peliculaService.delete(Id_Pelicula);
 		if(pelicula==true) {
+			log.info("Eliminando pelicula  con id: "+ Id_Pelicula);
+
 			return ResponseEntity.status(HttpStatus.OK).body("ha sido eliminado: "+pelicula);
 		}else {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();

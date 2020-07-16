@@ -38,38 +38,49 @@
     			<h3>
       				<a class="nav-link" href="http://localhost:8080/cartelera">Cartelera <i class='fas  fa-film'></i></a>
      			</h3>
-    		</li>
-    		<li class="nav-item">
-       			<h3>
-      				<a class="nav-link" href="http://localhost:8080/boletos">Boletos <i class='fas fa-money-bill'></i></a>
-      			</h3>
-    		</li>
-    		<li class="nav-item">
-      			<h3>
-      				<a class="nav-link" href="http://localhost:8080/login">Administrador <i class='far fa-folder-open'></i></a>
-      			</h3>
-    		</li>
+
   		</ul>
 	</nav>
 
 	<div class="container"><h2>Compra  boleto</h2></div>
 		<div class="container-sm p-3 my-3 ">
-	    	<form id="formulario">
+	    	<form id="formulario" action="http://localhost:8080/boletos/pago " >
 	    		<label for="cliente"> Cliente:</label><br>
-		  		<input type="text" class="form-control" placeholder="nombre del cliente" id="cliente" >
+		  		<input type="text" class="form-control" placeholder="nombre del cliente" id="cliente" required="required" maxlength="200"  >
 		  		<label for="fecha"> Fecha:</label><br>
-		  		<input type="datetime" class="form-control" placeholder="fecha de compra"id="fecha" >
+		  		<input type="date" class="form-control" placeholder="fecha de compra" id="fecha" required="required">
 		  		<label for="hora"> Horario:</label><br>
-		  		<input type="datetime" class="form-control" placeholder="hora de la función"id="hora" >
+		  		<input type="time" class="form-control" placeholder="hora de la función"id="hora" required="required">
 		  		<label for="numero"> Numero de boletos:</label><br>
-		  		<input type="text" class="form-control" placeholder="cantidad de boletos"id="numero" >
-		  		<label for="pelicla">Pelicula:</label><br>
-		  		<input type="text" class="form-control" placeholder="nombre de pelicula" id="película" ><br>
+		  		<input type="number" class="form-control" placeholder="cantidad de boletos"id="cantidad" required="required" maxlength="2" >
+		  		<label for="pelicula">Pelicula:</label><br>
+		  		<input type="text" class="form-control" placeholder="nombre de película" id="pelicula" required="required" maxlength="300" ><br>
+		 	<button class="btn btn-success" type="submit" id="Btn" onclick="guardarBoleto();">Comprar</button>
 		 	</form>
-		  	<button class="btn btn-success" type="submit" id="Btn" onclick="crearPelicula() ">Comprar</button>
-			<button class="btn btn-primary" type="submit" id="borrar" onclick="inicio ">Cancelar</button>
+		 	<form  action="http://localhost:8080/compraBoletos " >
+		 		<button class="btn btn-primary" type="submit" id="borrar" onclick="inicio">Cancelar</button>
+		 	</form>
 		</div>
-	</div>
+	<script> 
+		function guardarBoleto(){
+		
+			alert("hola");
+			$.ajaxSetup({contentType:"aplication/json; charset=utf-8"});
+			var request = $.ajax({
+				  method: "POST",
+				  url: "http://localhost:8080/boletos",
+				  data: JSON.stringify({id: "0", cliente: $('#cliente').val() , fecha: $('#fecha').val(), horario:$('#hora').val(), cantidad:$('#cantidad').val(), pelicula:$('#pelicula').val()}),
+				  contentType: "application/json"
+				});
+				request.done(function(data) {
+					alert("Boleto guardado con exito...");
+				});
+				
+				request.fail(function() {
+		 			 alert("Fallo  la conexion...");
+				});
+		}
+	</script>
     
 </body>
 </html>

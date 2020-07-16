@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.extern.slf4j.Slf4j;
@@ -23,14 +22,15 @@ import mx.uam.tsis.ejemplobackend.negocio.modelo.Boleto;
 
 @Slf4j
 @RestController
-@RequestMapping("/boletos")
 public class BoletosController {
     
     @Autowired
     private IBoletosService boletosService;
    
-    @PostMapping(path = "/create", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> create(@Valid @RequestBody Boleto boleto) {
+    @PostMapping(path = "/boletos", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> create( @RequestBody @Valid Boleto boleto) {
+    	log.info("recibi llamada a create boleto con" );
+	
 	Optional<Boleto> bol = boletosService.save(boleto);
 	if(bol.isPresent()) {
 	    return ResponseEntity.status(HttpStatus.CREATED).body(bol.get());
@@ -39,7 +39,7 @@ public class BoletosController {
 	}
     }
 
-    @PostMapping(path = "/find", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(path = "/boletos", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> findAll() {
 	Optional<Iterable<Boleto>> boletos = boletosService.findAll();
 	if(boletos.isPresent()) {
@@ -49,7 +49,7 @@ public class BoletosController {
 	}
     }
 
-    @GetMapping(path = "/find/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(path = "/boletos/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> findById(@PathVariable("id") Integer id) {
 	Optional<Boleto> boleto = boletosService.findById(id);
 	if(boleto.isPresent()) {
@@ -59,7 +59,7 @@ public class BoletosController {
 	}
     }
 
-    @PutMapping(path = "/update", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(path = "/boletos/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> update(@RequestBody @Valid Boleto boleto) {
 	log.info("Entrando a update");
 	Optional<Boleto> bol = boletosService.update(boleto);
@@ -70,7 +70,7 @@ public class BoletosController {
 	}
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/boletos/{id}")
     public ResponseEntity<?> deleteById(@PathVariable("id") Integer id) {
 	if(boletosService.deleteById(id)) {
 	    return ResponseEntity.status(HttpStatus.OK).build();
